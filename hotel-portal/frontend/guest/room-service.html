@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Service — Grand Palace Hotel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600;700&family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/custom.css">
+    <style>
+          /* ====================== GOLDEN SCROLLBAR ====================== */
+        :root {
+            --g1: #C9A84C;
+            --g2: #E8C96A;
+            --g3: #9E7A2E;
+            --dark: #080B12;
+        }
+
+        /* Main Golden Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--g1), var(--g3));
+            border-radius: 3px;
+        }
+
+        /* Hover effect */
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--g2), var(--g1));
+        }
+
+        /* Specific for Browse Container */
+        .service-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .service-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--g1), var(--g3));
+        }
+
+        /* ====================== GLOBAL RESET ====================== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family:'Outfit',sans-serif; background:#0a0d14; color:#e2e8f0; overflow-x:hidden; line-height:1.65; }
+
+        /* ── HERO BANNER ── */
+        .inner-hero {
+            position: relative; height: 380px; overflow: hidden;
+            background: url('https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=2200&q=85') center/cover no-repeat;
+        }
+        .inner-hero::after {
+            content:''; position:absolute; inset:0;
+            background: linear-gradient(180deg, rgba(8,11,18,.4) 0%, rgba(8,11,18,.85) 70%, #0a0d14 100%);
+        }
+        .inner-hero-content {
+            position:absolute; bottom:60px; left:0; right:0; z-index:2;
+            text-align:center; padding:0 20px;
+        }
+        .inner-hero-eyebrow {
+            display:inline-flex; align-items:center; gap:10px;
+            color:#C9A84C; font-size:.65rem; font-weight:700;
+            letter-spacing:3px; text-transform:uppercase; margin-bottom:12px;
+        }
+        .inner-hero-eyebrow::before, .inner-hero-eyebrow::after {
+            content:''; width:40px; height:1px;
+            background:linear-gradient(to right,transparent,#C9A84C);
+        }
+        .inner-hero-eyebrow::after { background:linear-gradient(to left,transparent,#C9A84C); }
+        .inner-hero h1 {
+            font-family:'Cormorant Garamond',serif; font-size:clamp(2.6rem,5vw,4.2rem);
+            font-weight:600; color:#fff; margin-bottom:10px; letter-spacing:-0.5px;
+        }
+        .inner-hero h1 em {
+            font-style:italic; font-weight:700;
+            background:linear-gradient(135deg,#F5E4A8,#E8C96A,#C9A84C);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+        }
+        .inner-hero p {
+            color:rgba(255,255,255,.55); font-size:1.05rem; max-width:600px; margin:0 auto;
+        }
+
+        /* Room Service Premium Layout System */
+        .service-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+        .page-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .page-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: #fff;
+            margin: 0;
+            font-weight: 600;
+        }
+        .category-section { 
+            margin-bottom: 40px; 
+        }
+        .category-title { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.8rem; 
+            font-weight: 600; 
+            margin-bottom: 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px;
+            color: #C9A84C;
+        }
+        .category-title::after { 
+            content: ''; 
+            flex: 1; 
+            height: 1px; 
+            background: rgba(255,255,255,.08); 
+        }
+        .menu-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 24px; 
+        }
+        .menu-item { 
+            background: rgba(255,255,255,.02); 
+            border: 1px solid rgba(255,255,255,.06); 
+            border-radius: 16px; 
+            padding: 24px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            transition: all 0.3s cubic-bezier(.23,1,.32,1); 
+            backdrop-filter: blur(8px);
+        }
+        .menu-item:hover { 
+            border-color: rgba(201,168,76,.4); 
+            box-shadow: 0 10px 25px rgba(0,0,0,.4), 0 0 20px rgba(201,168,76,.1); 
+            transform: translateY(-4px);
+        }
+        .menu-item-name { 
+            font-weight: 600; 
+            font-size: 1.1rem; 
+            color: #fff;
+        }
+        .menu-item-price { 
+            color: #C9A84C; 
+            font-weight: 700; 
+            font-size: 1.2rem; 
+        }
+        .menu-item-footer { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            margin-top: auto; 
+            padding-top: 14px;
+        }
+        .qty-control { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            background: rgba(0,0,0,.3);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .qty-btn { 
+            width: 28px; 
+            height: 28px; 
+            border: none; 
+            border-radius: 6px; 
+            background: rgba(255,255,255,.08); 
+            color: #fff;
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 14px; 
+            font-weight: 600; 
+            transition: all 0.2s; 
+        }
+        .qty-btn:hover { 
+            background: #C9A84C; 
+            color: #000; 
+        }
+        .qty-val { 
+            font-size: 14px; 
+            font-weight: 600; 
+            min-width: 20px; 
+            text-align: center; 
+            color: #fff;
+        }
+        
+        /* Slide-out Cart Panel Architecture */
+        .cart-panel { 
+            position: fixed; 
+            right: 0; 
+            top: 0; 
+            height: 100vh; 
+            width: 360px; 
+            background: rgba(8,11,18,.95); 
+            backdrop-filter: blur(24px);
+            border-left: 1px solid rgba(255,255,255,.08); 
+            box-shadow: -20px 0 40px rgba(0,0,0,0.5); 
+            z-index: 2000; 
+            transform: translateX(100%); 
+            transition: transform 0.4s cubic-bezier(.23,1,.32,1); 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .cart-panel.open { 
+            transform: translateX(0); 
+        }
+        .cart-header { 
+            padding: 24px; 
+            border-bottom: 1px solid rgba(255,255,255,.08); 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+        }
+        .cart-title { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.5rem; 
+            font-weight: 600; 
+            color: #fff;
+        }
+        .cart-items { 
+            flex: 1; 
+            overflow-y: auto; 
+            padding: 24px; 
+        }
+        .cart-item { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 16px 0; 
+            border-bottom: 1px solid rgba(255,255,255,.06); 
+            font-size: .9rem; 
+        }
+        .cart-footer { 
+            padding: 24px; 
+            border-top: 1px solid rgba(255,255,255,.08); 
+            background: rgba(0,0,0,.3);
+        }
+        .cart-total { 
+            display: flex; 
+            justify-content: space-between; 
+            font-weight: 600; 
+            font-size: 1.2rem; 
+            margin-bottom: 16px; 
+            color: #fff;
+        }
+        .cart-badge { 
+            position: absolute; 
+            top: -6px; 
+            right: -6px; 
+            background: #ff4757; 
+            color: #fff; 
+            border-radius: 50%; 
+            width: 22px; 
+            height: 22px; 
+            font-size: 11px; 
+            font-weight: 700; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+
+        /* Generic Panels & Tables Mapping */
+        .service-card {
+            background: rgba(255,255,255,.02);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,.06);
+            box-shadow: 0 10px 30px rgba(0,0,0,.3);
+            padding: 30px;
+            backdrop-filter: blur(8px);
+        }
+        .service-card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th { background: rgba(0,0,0,.3); color: #C9A84C; font-weight: 600; font-size: .8rem; padding: 16px; border-bottom: 1px solid rgba(255,255,255,.08); text-transform: uppercase; letter-spacing: 1px; }
+        td { padding: 16px; border-bottom: 1px solid rgba(255,255,255,.04); font-size: .95rem; color: #e2e8f0; }
+        
+        .w-full { width: 100%; }
+        textarea { width: 100%; padding: 14px; border: 1px solid rgba(255,255,255,.08); border-radius: 10px; font-family: inherit; margin-top: 8px; margin-bottom: 16px; resize: vertical; background: rgba(255,255,255,.04); color: #fff; font-size: .9rem; transition: all .3s; }
+        textarea:focus { outline: none; border-color: #C9A84C; background: rgba(201,168,76,.05); }
+
+        .btn-gold {
+            
+            background: linear-gradient(135deg, #E8C96A, #C9A84C) !important;
+            color: #000 !important;
+            border: none;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: .8rem;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(201,168,76,.3);
+            transition: all .4s cubic-bezier(.23,1,.32,1);
+            display: inline-flex; align-items: center; justify-content: center;
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(201,168,76,.5);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <a href="index.html" class="logo">Grand Palace</a>
+        
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="browse-rooms.html">Rooms</a></li>
+                <li><a href="room-service.html" class="active">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="user-actions" id="navAuthContext">
+            </div>
+    </header>
+    <!-- Hero Banner -->
+    <section class="inner-hero">
+        <div class="inner-hero-content">
+            <div class="inner-hero-eyebrow">Personalized</div>
+            <h1>In-Room <em>Services</em></h1>
+            <p>Elevate your stay with our curated selection of in-room dining, housekeeping, and personalized concierge requests.</p>
+        </div>
+    </section>
+
+    <main class="service-container">
+        <div class="page-header-flex">
+            <h1 class="page-title">In-Room Dining & Services</h1>
+            <button class="btn btn-gold" onclick="toggleCart()" style="position:relative; height:42px; padding: 0 20px;">
+                🛒 View Order Cart
+                <span class="cart-badge" id="cartBadge" style="display:none;">0</span>
+            </button>
+        </div>
+
+        <div id="alertBox"></div>
+
+        <div id="noBookingMsg" style="display:none; margin-bottom: 24px;">
+            <div class="service-card" style="text-align:center; padding:60px 30px;">
+                <div style="font-size:48px; margin-bottom:16px;">🏨</div>
+                <p style="font-family:'Cormorant Garamond',serif; font-size:2rem; margin-bottom:12px; color:#fff; font-weight:600;">No Active Stay Detected</p>
+                <p style="color:rgba(255,255,255,.6); margin-bottom:24px; font-size:1.05rem;">Room service facilities are exclusively dispatched for checked-in luxury residents.</p>
+                <a href="browse-rooms.html" class="btn btn-gold" style="padding: 12px 24px; font-size:.9rem;">Browse & Reserve Rooms</a>
+            </div>
+        </div>
+
+        <div id="menuArea"></div>
+
+        <div class="service-card" id="myRequestsCard" style="margin-top:30px;">
+            <div class="service-card-title">Live Service Orders Tracker</div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Requested Item</th>
+                            <th>Quantity</th>
+                            <th>Timestamp</th>
+                            <th>Fulfillment Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="myRequestsTable">
+                        <tr><td colspan="4" style="text-align:center; color:rgba(255,255,255,.5); padding:20px;">Compiling active service telemetry...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <div class="cart-panel" id="cartPanel">
+        <div class="cart-header">
+            <div class="cart-title">Your Order Basket</div>
+            <button onclick="toggleCart()" style="background:none; border:none; cursor:pointer; font-size:24px; color:#a0aec0;">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p style="text-align:center; color:rgba(255,255,255,.5); padding:24px 0;">Your basket is completely empty.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total Amount</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <div class="form-group">
+                <label style="font-size:11px; font-weight:700; color:#C9A84C; text-transform:uppercase; letter-spacing:1px;">Special Delivery Instructions</label>
+                <textarea id="orderNotes" placeholder="Dietary adjustments, room entry preferences..."></textarea>
+            </div>
+            <button class="btn btn-gold w-full" style="height: 44px;" onclick="placeOrder()">Place Request Order</button>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/ui-components.js"></script>
+    <script>
+        // 🛠️ Render Dynamic Navigation Layer Context
+        function renderNavbarAuth() {
+            const token = localStorage.getItem('hotelToken') || localStorage.getItem('token');
+            const userName = localStorage.getItem('hotelName') || 'Guest';
+            const authContainer = document.getElementById('navAuthContext');
+
+            if (token) {
+                const firstLetter = userName.charAt(0).toUpperCase();
+                authContainer.innerHTML = `
+                    <div class="user-icon" onclick="toggleDropdown()" style="cursor:pointer; display:flex; align-items:center; justify-content:center;">${firstLetter}</div>
+                    <div class="user-dropdown" id="userDropdownMenu">
+                        <ul>
+                            <li><span style="display:block; padding: 0.8rem 1.2rem; font-weight:600; font-size:0.9rem; color:#1A2E44; border-bottom:1px solid #eee;">Hi, ${userName}</span></li>
+                            <li><a href="my-bookings.html">My Reservations</a></li>
+                            <li><button onclick="handleNavbarSignOut()" style="color: #ef4444; font-weight: 600; background:none; border:none; width:100%; text-align:left; padding:0.8rem 1.2rem; cursor:pointer;">Sign Out</button></li>
+                        </ul>
+                    </div>
+                `;
+            } else {
+                authContainer.innerHTML = `
+                    <a href="/login.html" class="btn-login" onclick="redirectToLogin(event)">Sign In</a>
+                `;
+            }
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('userDropdownMenu');
+            if(dropdown) dropdown.classList.toggle('show');
+        }
+
+        window.addEventListener('click', function(e) {
+            if (!e.target.matches('.user-icon')) {
+                const dropdown = document.getElementById('userDropdownMenu');
+                if (dropdown && dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                }
+            }
+        });
+
+        function redirectToLogin(e) {
+            if(e) e.preventDefault();
+            window.location.href = window.location.origin + '/login.html'; 
+        }
+
+        function handleNavbarSignOut() {
+            localStorage.removeItem('hotelToken');
+            localStorage.removeItem('token');
+            localStorage.removeItem('hotelRole');
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('hotelName');
+            localStorage.removeItem('hotelUserId');
+            redirectToLogin();
+        }
+
+        // --- Core Architectural Business Logic Matrix ---
+        const catIcons = { Food:'🍽️', Beverage:'🥤', Housekeeping:'🛏️', Laundry:'👕', Maintenance:'🔧' };
+        let cart = {};
+        let menuItems = [];
+        let activeBookingId = null;
+
+        async function init() {
+            try {
+                const bookings = await api.get('/bookings');
+                const active = bookings.find(b => b.Status === 'Checked-In');
+                if (!active) {
+                    document.getElementById('noBookingMsg').style.display = 'block';
+                    document.getElementById('menuArea').style.display = 'none';
+                    document.getElementById('myRequestsCard').style.display = 'none';
+                    loadMyRequests([]);
+                    return;
+                }
+                activeBookingId = active.BookingId;
+                loadMenu();
+                loadMyRequests(bookings);
+            } catch(e) {
+                showAlert('alertBox', e.message);
+            }
+        }
+
+        async function loadMenu() {
+            try {
+                menuItems = await api.get('/services/menu');
+                const grouped = {};
+                menuItems.forEach(item => {
+                    if (!grouped[item.Category]) grouped[item.Category] = [];
+                    grouped[item.Category].push(item);
+                });
+
+                const menuArea = document.getElementById('menuArea');
+                menuArea.innerHTML = Object.entries(grouped).map(([cat, items]) => `
+                    <div class="category-section">
+                        <div class="category-title">${catIcons[cat] || '•'} ${cat}</div>
+                        <div class="menu-grid">
+                            ${items.filter(i => i.IsAvailable).map(item => `
+                                <div class="menu-item">
+                                    <div class="menu-item-name">${item.ItemName}</div>
+                                    <div class="menu-item-price">$${parseFloat(item.Price).toFixed(2)}</div>
+                                    <div class="menu-item-footer">
+                                        <div class="qty-control">
+                                            <button class="qty-btn" onclick="changeQty(${item.ItemId}, -1)">−</button>
+                                            <span class="qty-val" id="qty-${item.ItemId}">0</span>
+                                            <button class="qty-btn" onclick="changeQty(${item.ItemId}, 1)">+</button>
+                                        </div>
+                                        <button class="btn btn-sm btn-gold" onclick="addToCart(${item.ItemId})">Add</button>
+                                    </div>
+                                </div>`).join('')}
+                        </div>
+                    </div>`).join('');
+            } catch(e) {
+                showAlert('alertBox', 'Could not compile kitchen configuration data: ' + e.message);
+            }
+        }
+
+        async function loadMyRequests(bookings) {
+            try {
+                const reqs = await api.get('/services/requests');
+                const tbody = document.getElementById('myRequestsTable');
+                if (!reqs || reqs.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:30px; color:rgba(255,255,255,.5);">No localized execution orders placed.</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = reqs.map(r => `<tr>
+                    <td><strong style="color:#fff;">${r.ItemName}</strong></td>
+                    <td><span style="font-weight:600; color:#C9A84C;">${r.Quantity}</span></td>
+                    <td><span style="color:rgba(255,255,255,.7);">${formatDate(r.RequestedAt)}</span></td>
+                    <td>${typeof statusBadge === 'function' ? statusBadge(r.Status) : `<span class="badge">${r.Status}</span>`}</td>
+                </tr>`).join('');
+            } catch(e) {}
+        }
+
+        function changeQty(itemId, delta) {
+            const el = document.getElementById(`qty-${itemId}`);
+            let val = parseInt(el.textContent) + delta;
+            if (val < 0) val = 0;
+            el.textContent = val;
+        }
+
+        function addToCart(itemId) {
+            const qty = parseInt(document.getElementById(`qty-${itemId}`).textContent);
+            if (qty === 0) { showAlert('alertBox','Specify selection target volume metrics first.'); return; }
+            const item = menuItems.find(i => i.ItemId === itemId);
+            if (!item) return;
+            cart[itemId] = { item, qty: (cart[itemId]?.qty || 0) + qty };
+            document.getElementById(`qty-${itemId}`).textContent = '0';
+            renderCart();
+            showAlert('alertBox', `${item.ItemName} staged inside execution cart successfully!`, 'success');
+        }
+
+        function renderCart() {
+            const keys = Object.keys(cart);
+            const badge = document.getElementById('cartBadge');
+            const totalItems = keys.reduce((sum, k) => sum + cart[k].qty, 0);
+            badge.style.display = totalItems > 0 ? 'flex' : 'none';
+            badge.textContent = totalItems;
+
+            const cartItems = document.getElementById('cartItems');
+            if (keys.length === 0) {
+                cartItems.innerHTML = '<p style="text-align:center; color:rgba(255,255,255,.5); padding:24px 0;">Your basket is completely empty.</p>';
+                document.getElementById('cartTotal').textContent = '$0.00';
+                return;
+            }
+
+            let total = 0;
+            cartItems.innerHTML = keys.map(k => {
+                const { item, qty } = cart[k];
+                const subtotal = item.Price * qty;
+                total += subtotal;
+                return `<div class="cart-item">
+                    <div>
+                        <div style="font-weight:600; color:#fff;">${item.ItemName}</div>
+                        <div style="font-size:12px; color:rgba(255,255,255,.5); margin-top:4px;">$${parseFloat(item.Price).toFixed(2)} &times; ${qty}</div>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:12px;">
+                        <span style="font-weight:700; color:#C9A84C;">$${subtotal.toFixed(2)}</span>
+                        <button onclick="removeFromCart(${k})" style="background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); cursor:pointer; color:#ef4444; font-size:16px; border-radius:6px; width:28px; height:28px; display:flex; align-items:center; justify-content:center; transition:all .2s;" onmouseover="this.style.background='#ef4444'; this.style.color='#fff';" onmouseout="this.style.background='rgba(255,255,255,.05)'; this.style.color='#ef4444';">&times;</button>
+                    </div>
+                </div>`;
+            }).join('');
+            document.getElementById('cartTotal').textContent = `$${total.toFixed(2)}`;
+        }
+
+        function removeFromCart(itemId) {
+            delete cart[itemId];
+            renderCart();
+        }
+
+        function toggleCart() {
+            document.getElementById('cartPanel').classList.toggle('open');
+        }
+
+        async function placeOrder() {
+            if (!activeBookingId) { showAlert('alertBox','Active check-in reference matrix missing.'); return; }
+            const items = Object.values(cart);
+            if (items.length === 0) { showAlert('alertBox','No queued parameters discovered in cart.'); return; }
+
+            try {
+                for (const { item, qty } of items) {
+                    await api.post('/services/request', {
+                        BookingId: activeBookingId,
+                        ItemId: item.ItemId,
+                        Quantity: qty,
+                        Notes: document.getElementById('orderNotes').value,
+                    });
+                }
+                cart = {};
+                renderCart();
+                document.getElementById('cartPanel').classList.remove('open');
+                document.getElementById('orderNotes').value = '';
+                showAlert('alertBox', 'Service pipeline initialization absolute! Out for dispatch.', 'success');
+                init();
+            } catch(e) {
+                showAlert('alertBox', e.message);
+            }
+        }
+
+        // Header scroll effect
+        const hdr = document.querySelector('.main-header');
+        window.addEventListener('scroll', () => {
+            hdr.classList.toggle('scrolled', window.scrollY > 60);
+        });
+        if (window.scrollY > 60) hdr.classList.add('scrolled');
+
+        window.onload = function() {
+            renderNavbarAuth();
+            init();
+        }
+    </script>
+</body>
+</html>

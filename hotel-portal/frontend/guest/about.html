@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us — Grand Palace Hotel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600;700&family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/custom.css">
+    
+    <style>
+        /* ====================== GOLDEN SCROLLBAR ====================== */
+        :root {
+            --g1: #C9A84C;
+            --g2: #E8C96A;
+            --g3: #9E7A2E;
+            --dark: #080B12;
+        }
+
+        /* Main Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--g1), var(--g3));
+            border-radius: 3px;
+        }
+
+        /* Hover effect */
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--g2), var(--g1));
+        }
+
+        /* For the About Container specifically */
+        .about-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .about-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--g1), var(--g3));
+        }
+
+        /* ====================== GLOBAL RESET ====================== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family:'Outfit',sans-serif; background:#0a0d14; color:#e2e8f0; overflow-x:hidden; line-height:1.65; }
+
+        /* ── HERO BANNER ── */
+        .inner-hero {
+            position: relative; height: 380px; overflow: hidden;
+            background: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=2200&q=85') center/cover no-repeat;
+        }
+        .inner-hero::after {
+            content:''; position:absolute; inset:0;
+            background: linear-gradient(180deg, rgba(8,11,18,.4) 0%, rgba(8,11,18,.85) 70%, #0a0d14 100%);
+        }
+        .inner-hero-content {
+            position:absolute; bottom:60px; left:0; right:0; z-index:2;
+            text-align:center; padding:0 20px;
+        }
+        .inner-hero-eyebrow {
+            display:inline-flex; align-items:center; gap:10px;
+            color:#C9A84C; font-size:.65rem; font-weight:700;
+            letter-spacing:3px; text-transform:uppercase; margin-bottom:12px;
+        }
+        .inner-hero-eyebrow::before, .inner-hero-eyebrow::after {
+            content:''; width:40px; height:1px;
+            background:linear-gradient(to right,transparent,#C9A84C);
+        }
+        .inner-hero-eyebrow::after { background:linear-gradient(to left,transparent,#C9A84C); }
+        .inner-hero h1 {
+            font-family:'Cormorant Garamond',serif; font-size:clamp(2.6rem,5vw,4.2rem);
+            font-weight:600; color:#fff; margin-bottom:10px; letter-spacing:-0.5px;
+        }
+        .inner-hero h1 em {
+            font-style:italic; font-weight:700;
+            background:linear-gradient(135deg,#F5E4A8,#E8C96A,#C9A84C);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+        }
+        .inner-hero p {
+            color:rgba(255,255,255,.55); font-size:1.05rem; max-width:600px; margin:0 auto;
+        }
+
+        /* ── PAGE CONTENT ── */
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+        .about-section {
+            padding: 20px 0 60px;
+            text-align: center;
+        }
+        .about-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            color: #fff;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+        .about-section p.lead {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            color: rgba(255,255,255,.65);
+            max-width: 850px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        .about-image {
+            width: 100%;
+            max-width: 1000px;
+            height: 540px;
+            background: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
+            border-radius: 20px;
+            margin: 50px auto;
+            box-shadow: 0 30px 80px rgba(0,0,0,.4);
+            border: 1px solid rgba(255,255,255,.06);
+            position: relative;
+        }
+        .about-image::after {
+            content:''; position:absolute; inset:0; border-radius:20px;
+            background: linear-gradient(180deg, transparent 60%, rgba(10,13,20,.8) 100%);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            max-width: 1100px;
+            margin: 60px auto 20px;
+        }
+        .feature-item {
+            background: rgba(255,255,255,.025);
+            padding: 45px 36px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,.06);
+            text-align: center;
+            transition: all 0.4s cubic-bezier(.23,1,.32,1);
+            position: relative;
+            backdrop-filter: blur(8px);
+        }
+        .feature-item::after {
+            content:''; position:absolute; inset:0; border-radius:20px;
+            border:1.5px solid transparent;
+            background:linear-gradient(135deg,#E8C96A,#9E7A2E) border-box;
+            -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+            -webkit-mask-composite:destination-out; mask-composite:exclude;
+            opacity:0; transition:opacity .4s; pointer-events:none;
+        }
+        .feature-item:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 80px rgba(0,0,0,.4), 0 0 30px rgba(201,168,76,.08);
+        }
+        .feature-item:hover::after { opacity:1; }
+        
+        .feature-icon {
+            width: 70px; height: 70px;
+            background: linear-gradient(135deg, rgba(201,168,76,.15), rgba(201,168,76,.05));
+            border: 1px solid rgba(201,168,76,.2);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 1.6rem;
+            color: #E8C96A;
+            transition: transform 0.4s;
+        }
+        .feature-item:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: linear-gradient(135deg, #E8C96A, #C9A84C);
+            color: #000;
+        }
+        .feature-item h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 14px;
+            font-weight: 600;
+        }
+        .feature-item p {
+            font-size: .95rem;
+            color: rgba(255,255,255,.5);
+            line-height: 1.7;
+            margin-bottom: 0;
+            font-weight: 300;
+        }
+
+        @media (max-width: 768px) {
+            .about-section h2 { font-size: 2.2rem; }
+            .about-section p.lead { font-size: 1rem; }
+            .about-image { height: 320px; }
+            .inner-hero { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="loader">
+        <div class="loader-bar"><div class="loader-fill"></div></div>
+    </div>
+
+    <header class="main-header" id="hdr">
+        <a href="index.html" class="logo">
+            Grand <span>Palace</span>
+        </a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="browse-rooms.html">Rooms</a></li>
+                <li><a href="room-service.html">Services</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="nav-right">
+            <div id="navAuthContext"></div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="inner-hero">
+        <div class="inner-hero-content">
+            <div class="inner-hero-eyebrow">Our Legacy</div>
+            <h1>A Tradition of <em>Excellence</em></h1>
+            <h2>Welcome to Grand Palace Hotel</h2>
+            <p>Discover the story behind Grand Palace Hotel and our unwavering commitment to unparalleled luxury and hospitality.</p>
+        </div>
+    </section>
+
+    <main class="about-container">
+        <div class="about-section">
+            <p class="lead">
+                Nestled in the heart of the city, Grand Palace Hotel offers a luxurious escape with unparalleled service and breathtaking views.
+                Since our inception in 1990, we have been dedicated to providing an exceptional experience for every guest, combining classic elegance with modern amenities.
+            </p>
+            
+            <div class="about-image"></div>
+            
+            <p class="lead">
+                Our commitment to excellence is reflected in every detail, from our meticulously designed rooms to our world-class dining options and state-of-the-art facilities.
+                We believe in creating lasting memories and moments of pure relaxation and indulgence for all who walk through our doors.
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-bed"></i></div>
+                    <h3>Exquisite Accommodations</h3>
+                    <p>Each room and suite is a sanctuary of comfort, designed with elegant furnishings and equipped with premium amenities to ensure a restful stay.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-utensils"></i></div>
+                    <h3>Fine Dining Experiences</h3>
+                    <p>Indulge your palate with our diverse culinary offerings, from gourmet international cuisine to local delicacies, prepared by award-winning chefs.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-bell-concierge"></i></div>
+                    <h3>Unmatched Hospitality</h3>
+                    <p>Our dedicated team provides personalized service, attending to your every need with warmth and efficiency, making your stay truly memorable.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/ui-components.js"></script>
+    <script>
+        // 🛠️ Render Dynamic Navigation Layer Context
+        function renderNavbarAuth() {
+            const token = localStorage.getItem('hotelToken') || localStorage.getItem('token');
+            const userName = localStorage.getItem('hotelName') || 'Guest';
+            const authContainer = document.getElementById('navAuthContext');
+
+            if (token) {
+                const firstLetter = userName.charAt(0).toUpperCase();
+                authContainer.innerHTML = `
+                    <div class="user-icon" onclick="toggleDropdown()" style="cursor:pointer; display:flex; align-items:center; justify-content:center;">${firstLetter}</div>
+                    <div class="user-dropdown" id="userDropdownMenu">
+                        <ul>
+                            <li><span style="display:block; padding: 0.8rem 1.2rem; font-weight:600; font-size:0.9rem; color:#1A2E44; border-bottom:1px solid #eee;">Hi, ${userName}</span></li>
+                            <li><a href="my-bookings.html">My Reservations</a></li>
+                            <li><button onclick="handleNavbarSignOut()" style="color: #ef4444; font-weight: 600; background:none; border:none; width:100%; text-align:left; padding:0.8rem 1.2rem; cursor:pointer;">Sign Out</button></li>
+                        </ul>
+                    </div>
+                `;
+            } else {
+                authContainer.innerHTML = `
+                    <a href="/login.html" class="btn-login" onclick="redirectToLogin(event)">Sign In</a>
+                `;
+            }
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('userDropdownMenu');
+            if(dropdown) dropdown.classList.toggle('show');
+        }
+
+        window.addEventListener('click', function(e) {
+            if (!e.target.matches('.user-icon')) {
+                const dropdown = document.getElementById('userDropdownMenu');
+                if (dropdown && dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                }
+            }
+        });
+
+        function redirectToLogin(e) {
+            if(e) e.preventDefault();
+            window.location.href = window.location.origin + '/login.html'; 
+        }
+
+        function handleNavbarSignOut() {
+            localStorage.removeItem('hotelToken');
+            localStorage.removeItem('token');
+            localStorage.removeItem('hotelRole');
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('hotelName');
+            localStorage.removeItem('hotelUserId');
+            redirectToLogin();
+        }
+
+        // Header scroll effect
+        const hdr = document.getElementById('hdr');
+        window.addEventListener('scroll', () => {
+            hdr.classList.toggle('scrolled', window.scrollY > 60);
+        });
+        if (window.scrollY > 60) hdr.classList.add('scrolled');
+
+        window.onload = function() {
+            renderNavbarAuth();
+        }
+    </script>
+</body>
+</html>

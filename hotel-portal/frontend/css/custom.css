@@ -1,0 +1,620 @@
+
+/* custom.css - New styles for hotel portal UI */
+
+/* General styles */
+body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--clr-text);
+    background-color: var(--clr-bg);
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --clr-primary-navy: #1A2E44;
+    --clr-secondary-gold: #C29A4D;
+    --clr-text: #333;
+    --clr-light-text: #777;
+    --clr-bg: #F8F9FA;
+    --clr-white: #FFFFFF;
+    --clr-light-grey: #E9ECEF;
+    --clr-border: #DEE2E6;
+    --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    --border-radius: 0.5rem;
+}
+
+/* Header */
+.main-header {
+    background-color: var(--clr-white);
+    box-shadow: var(--box-shadow);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.main-header .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--clr-primary-navy);
+    text-decoration: none;
+}
+
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: var(--clr-primary-navy);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: var(--clr-secondary-gold);
+}
+
+.user-actions {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--clr-secondary-gold);
+    color: var(--clr-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--clr-white);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    min-width: 180px;
+    transform: translateY(10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.user-dropdown.show {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.user-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.user-dropdown li a,
+.user-dropdown li button {
+    display: block;
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    color: var(--clr-primary-navy);
+    text-decoration: none;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.user-dropdown li a:hover,
+.user-dropdown li button:hover {
+    background-color: var(--clr-light-grey);
+}
+
+.btn-login {
+    background-color: var(--clr-primary-navy);
+    color: var(--clr-white);
+    padding: 0.7rem 1.5rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #0F1F2F;
+}
+
+/* Carousel (basic structure, no JS animation yet) */
+.carousel {
+    width: 100%;
+    height: 60vh; /* Adjust as needed */
+    background-color: var(--clr-light-grey);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-inner {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    min-width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--clr-white);
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Example images - replace with actual paths */
+.carousel-item:nth-child(1) { background-image: url('https://via.placeholder.com/1500x600/1A2E44/FFFFFF?text=Welcome+to+Grand+Palace'); }
+.carousel-item:nth-child(2) { background-image: url('https://via.placeholder.com/1500x600/C29A4D/FFFFFF?text=Luxurious+Rooms'); }
+.carousel-item:nth-child(3) { background-image: url('https://via.placeholder.com/1500x600/1A2E44/FFFFFF?text=Exceptional+Services'); }
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--clr-white);
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 1.5rem;
+}
+
+.carousel-control.prev { left: 0; border-top-right-radius: var(--border-radius); border-bottom-right-radius: var(--border-radius); }
+.carousel-control.next { right: 0; border-top-left-radius: var(--border-radius); border-bottom-left-radius: var(--border-radius); }
+
+
+/* Card Section */
+.card-section {
+    padding: 3rem 2rem;
+    background-color: var(--clr-bg);
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    background-color: var(--clr-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px;
+    background-color: var(--clr-light-grey);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: var(--clr-light-text);
+    background-size: cover;
+    background-position: center;
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+.card-content h3 {
+    margin-top: 0;
+    color: var(--clr-primary-navy);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+}
+
+.card-content p {
+    font-size: 0.95rem;
+    color: var(--clr-light-text);
+    line-height: 1.6;
+}
+
+/* Footer */
+.main-footer {
+    background-color: var(--clr-primary-navy);
+    color: var(--clr-white);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.footer-nav ul {
+    list-style: none;
+    margin: 0 0 1.5rem 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.footer-nav a {
+    text-decoration: none;
+    color: var(--clr-white);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.footer-nav a:hover {
+    opacity: 1;
+}
+
+.social-icons {
+    margin-top: 1.5rem;
+}
+
+.social-icons a {
+    color: var(--clr-white);
+    font-size: 1.5rem;
+    margin: 0 0.8rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.social-icons a:hover {
+    opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-top: 1rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .user-actions {
+        width: 100%;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .user-dropdown {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+    }
+
+    .carousel {
+        height: 40vh;
+    }
+
+    .card-section {
+        padding: 2rem 1rem;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .main-footer {
+        padding: 2rem 1rem;
+    }
+}
+
+
+/* ==========================================
+   💎 PREMIUM SERVICES CARDS STYLES MATRIX
+   ========================================== */
+.card-section {
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 0 20px;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.section-subtitle {
+    color: #aeaeae;
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Grid Layout Architecture */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+/* Individual Luxury Card Element */
+.luxury-card {
+    background-color: #12131c;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+}
+
+/* Card Image Wrapper with Overflow Control for Zoom Effect */
+.card-image-wrapper {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-image-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(18, 19, 28, 0) 50%, rgba(18, 19, 28, 0.8) 100%);
+    z-index: 2;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Card Typography & Text Content Layer */
+.card-content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Ensures equal heights regardless of content length */
+    position: relative;
+    z-index: 3;
+}
+
+.card-content h3 {
+    font-family: 'Playfair Display', serif;
+    color: #ffffff;
+    font-size: 1.4rem;
+    margin: 0 0 12px 0;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.card-content p {
+    color: #aeaeae;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 0 25px 0;
+    flex-grow: 1;
+}
+
+/* Elegant Action Label Link */
+.card-link-action {
+    color: #d4af37;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    margin-top: auto; /* Pushes the action to the absolute bottom of the card */
+}
+
+.card-link-action i {
+    font-size: 0.85rem;
+    transition: transform 0.3s ease;
+}
+
+/* ==========================================
+   ✨ HOVER INTERACTIVE ACTIONS MATRIX
+   ========================================== */
+.luxury-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(212, 175, 55, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(212, 175, 55, 0.1);
+}
+
+.luxury-card:hover .card-image {
+    transform: scale(1.08);
+}
+
+.luxury-card:hover .card-content h3 {
+    color: #d4af37;
+}
+
+.luxury-card:hover .card-link-action {
+    color: #ffffff;
+}
+
+.luxury-card:hover .card-link-action i {
+    transform: translateX(6px);
+}
+
+/* Responsive Scaling Overrides */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+    }
+    .card-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    .card-image-wrapper {
+        height: 200px;
+    }
+}/* ------------------ HEADER PREMIUM (From index.html) ------------------ */
+.main-header{
+  position:fixed;top:0;left:0;width:100%;z-index:9000;
+  padding:0 6%;height:86px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .5s cubic-bezier(.23,1,.32,1);
+  background:transparent;
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+  border-bottom:1px solid transparent;
+}
+/* On scroll, the navbar becomes visible with a dark glassmorphic look */
+.main-header.scrolled{
+  background:transparent;
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  height:68px;
+  border-bottom:1px solid rgba(201,168,76,.18);
+}
+
+.logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;font-weight:600;letter-spacing:1px;
+  color:#fff;text-decoration:none;
+  display:flex;align-items:center;gap:12px;
+  position:relative;z-index:1;
+}
+.logo-emblem{
+  width:38px;height:38px;
+  background:linear-gradient(135deg,#E8C96A,#C9A84C,#9E7A2E);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.95rem;color:#000;
+  box-shadow:0 4px 20px rgba(201,168,76,.5);
+}
+.logo span{color:#E8C96A}
+
+.main-nav ul{display:flex;list-style:none;gap:2.8rem; margin:0; padding:0;}
+.main-nav a{
+  color:rgba(255,255,255,.72);text-decoration:none;
+  font-weight:400;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;
+  transition:color .3s;position:relative;padding-bottom:5px;
+}
+.main-nav a::after{
+  content:'';position:absolute;bottom:0;left:50%;
+  width:0;height:1px;background:#C9A84C;
+  transition:width .35s cubic-bezier(.23,1,.32,1),left .35s cubic-bezier(.23,1,.32,1);
+}
+.main-nav a:hover,
+.main-nav a.active{color:#fff}
+.main-nav a:hover::after,
+.main-nav a.active::after{width:100%;left:0}
+
+.nav-right{display:flex;align-items:center;gap:14px}
+.btn-login{
+  background:linear-gradient(135deg,#E8C96A,#C9A84C);
+  color:#000;padding:9px 24px;border-radius:50px;
+  font-weight:700;font-size:.8rem;letter-spacing:.5px;
+  text-decoration:none;transition:all .4s cubic-bezier(.23,1,.32,1);
+  box-shadow:0 4px 18px rgba(201,168,76,.4);
+}
+.btn-login:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(201,168,76,.6)}
+
+.user-actions{position:relative}
+.user-icon{
+  cursor:pointer;width:42px;height:42px;
+  background:linear-gradient(135deg,#E8C96A,#C9A84C);
+  color:#000;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:1rem;
+  box-shadow:0 4px 16px rgba(201,168,76,.45);
+  transition:all .3s cubic-bezier(.23,1,.32,1);
+}
+.user-icon:hover{transform:scale(1.1);box-shadow:0 8px 28px rgba(201,168,76,.6)}
+.user-dropdown{
+  display:none;position:absolute;right:0;top:58px;
+  background:#0D1119;min-width:220px;
+  border:1px solid rgba(201,168,76,.18);border-radius:16px;
+  overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.5);z-index:10000;
+}
+.user-dropdown.show{display:block;animation:dropIn .25s cubic-bezier(.23,1,.32,1)}
+@keyframes dropIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.user-dropdown ul{list-style:none; margin:0; padding:0;}
+.user-dropdown ul li a{
+  display:flex;align-items:center;gap:10px;
+  padding:.85rem 1.3rem;color:#c8cfe0;
+  text-decoration:none;font-size:.87rem;transition:all .2s;
+}
+.user-dropdown ul li a:hover{background:rgba(201,168,76,.08);color:#E8C96A}
+.dd-name{
+  display:block;padding:.9rem 1.3rem;font-weight:600;
+  font-size:.87rem;color:#fff;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  background:rgba(201,168,76,.04);
+}
+.dd-signout{
+  color:#ef4444!important;font-weight:700!important;
+  background:none;border:none;width:100%;text-align:left;
+  padding:.85rem 1.3rem;cursor:pointer;font-size:.87rem;
+  font-family:inherit;display:flex;align-items:center;gap:10px;
+  transition:background .2s;
+}
+.dd-signout:hover{background:rgba(239,68,68,.08)!important}

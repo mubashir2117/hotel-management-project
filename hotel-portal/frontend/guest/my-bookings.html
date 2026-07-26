@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings — Grand Palace Hotel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/custom.css">
+    <style>
+
+          /* ====================== GOLDEN SCROLLBAR ====================== */
+        :root {
+            --g1: #C9A84C;
+            --g2: #E8C96A;
+            --g3: #9E7A2E;
+            --dark: #080B12;
+        }
+
+        /* Main Golden Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--g1), var(--g3));
+            border-radius: 3px;
+        }
+
+        /* Hover effect */
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--g2), var(--g1));
+        }
+
+        /* Specific for Browse Container */
+        .bookings-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .bookings-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--g1), var(--g3));
+        }
+
+        /* My Bookings Premium Main Layout Context */
+        .bookings-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .page-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: #1A2E44;
+            margin: 0;
+        }
+        .bookings-card {
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            padding: 24px;
+            overflow: hidden;
+        }
+        .table-wrap {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        th {
+            background-color: #f8fafc;
+            color: #4a5568;
+            font-weight: 600;
+            font-size: 13px;
+            padding: 14px 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #edf2f7;
+        }
+        td {
+            padding: 16px;
+            border-bottom: 1px solid #edf2f7;
+            font-size: 14px;
+            color: #2d3748;
+            vertical-align: middle;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* Interactive Elements styling overrides */
+        .btn-sm {
+            padding: 6px 14px;
+            font-size: 12px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        .btn-danger {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 48px 24px;
+            color: #718096;
+        }
+        .empty-state p {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #1A2E44;
+        }
+        .empty-state span {
+            font-size: 14px;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .page-header-flex {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header class="main-header" id="hdr">
+  <a href="index.html" class="logo">
+    Grand <span>Palace</span>
+  </a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="browse-rooms.html">Rooms</a></li>
+                <li><a href="room-service.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="user-actions" id="navAuthContext">
+            </div>
+    </header>
+<br>
+<br>
+<br><br>
+<br>
+    <main class="bookings-container">
+        <div class="page-header-flex">
+            <h1 class="page-title">My Reservations</h1>
+            <a href="browse-rooms.html" class="btn btn-gold" style="height: 40px; display: flex; align-items: center; justify-content: center;">+ New Booking</a>
+        </div>
+        
+        <div id="alertBox"></div>
+
+        <div class="bookings-card">
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Room Structure</th>
+                            <th>Check-in Date</th>
+                            <th>Check-out Date</th>
+                            <th>Nights</th>
+                            <th>Total Gross</th>
+                            <th>Status Matrix</th>
+                            <th>Actions Interface</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookingsTable">
+                        <tr>
+                            <td colspan="8">
+                                <div style="text-align:center; padding:32px; color:#718096;">
+                                    Fetching live dynamic reservation logs...
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/ui-components.js"></script>
+    <script>
+        // 🛠️ Render Dynamic Navigation Context Layer
+        function renderNavbarAuth() {
+            const token = localStorage.getItem('hotelToken') || localStorage.getItem('token');
+            const userName = localStorage.getItem('hotelName') || 'Guest';
+            const authContainer = document.getElementById('navAuthContext');
+
+            if (token) {
+                const firstLetter = userName.charAt(0).toUpperCase();
+                authContainer.innerHTML = `
+                    <div class="user-icon" onclick="toggleDropdown()" style="cursor:pointer; display:flex; align-items:center; justify-content:center;">${firstLetter}</div>
+                    <div class="user-dropdown" id="userDropdownMenu">
+                        <ul>
+                            <li><span style="display:block; padding: 0.8rem 1.2rem; font-weight:600; font-size:0.9rem; color:#1A2E44; border-bottom:1px solid #eee;">Hi, ${userName}</span></li>
+                            <li><a href="my-bookings.html" style="font-weight:600; color:#C9A84C;">My Reservations</a></li>
+                            <li><button onclick="handleNavbarSignOut()" style="color: #ef4444; font-weight: 600; background:none; border:none; width:100%; text-align:left; padding:0.8rem 1.2rem; cursor:pointer;">Sign Out</button></li>
+                        </ul>
+                    </div>
+                `;
+            } else {
+                authContainer.innerHTML = `
+                    <a href="/login.html" class="btn-login" onclick="redirectToLogin(event)">Sign In</a>
+                `;
+            }
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('userDropdownMenu');
+            if(dropdown) dropdown.classList.toggle('show');
+        }
+
+        window.addEventListener('click', function(e) {
+            if (!e.target.matches('.user-icon')) {
+                const dropdown = document.getElementById('userDropdownMenu');
+                if (dropdown && dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                }
+            }
+        });
+
+        function redirectToLogin(e) {
+            if(e) e.preventDefault();
+            window.location.href = window.location.origin + '/login.html'; 
+        }
+
+        function handleNavbarSignOut() {
+            localStorage.removeItem('hotelToken');
+            localStorage.removeItem('token');
+            localStorage.removeItem('hotelRole');
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('hotelName');
+            localStorage.removeItem('hotelUserId');
+            redirectToLogin();
+        }
+
+        // --- Core Records Population Operations ---
+        async function loadBookings() {
+            try {
+                const bookings = await api.get('/bookings');
+                const tbody = document.getElementById('bookingsTable');
+                
+                if (!bookings || bookings.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state">
+                        <p>No active reservations discovered</p>
+                        <span>You haven't placed any luxury room reservations yet.</span>
+                        <a href="browse-rooms.html" class="btn btn-gold" style="margin-top:12px; display:inline-block;">Browse Available Rooms</a>
+                    </div></td></tr>`;
+                    return;
+                }
+                
+                tbody.innerHTML = bookings.map(b => {
+                    const canCancel = ['Pending','Confirmed'].includes(b.Status);
+                    return `<tr>
+                        <td><span style="font-size:12px; font-weight:600; color:#4a5568;">#${b.BookingId}</span></td>
+                        <td><strong>Room ${b.RoomNumber || b.RoomId}</strong><br><span style="font-size:12px; color:#718096;">${b.RoomType || 'Luxury Setup'}</span></td>
+                        <td>${formatDate(b.CheckInDate)}</td>
+                        <td>${formatDate(b.CheckOutDate)}</td>
+                        <td><span style="font-weight:500;">${b.Nights}</span></td>
+                        <td><strong style="color:#1A2E44;">$${parseFloat(b.TotalPrice).toFixed(2)}</strong></td>
+                        <td>${typeof statusBadge === 'function' ? statusBadge(b.Status) : `<span class="badge ${b.Status.toLowerCase()}">${b.Status}</span>`}</td>
+                        <td>${canCancel ? `<button class="btn btn-sm btn-danger" onclick="cancelBooking(${b.BookingId})">Cancel Stay</button>` : '<span style="color:#a0aec0; font-size:12px;">—</span>'}</td>
+                    </tr>`;
+                }).join('');
+            } catch(e) {
+                showAlert('alertBox', e.message);
+                document.getElementById('bookingsTable').innerHTML = `<tr><td colspan="8" style="text-align:center; color:#ef4444; padding:20px;">Failed to compile database booking rows.</td></tr>`;
+            }
+        }
+
+        async function cancelBooking(id) {
+            if (!confirm('Are you absolutely sure you want to cancel this booking setup? This action is absolute.')) return;
+            try {
+                await api.delete(`/bookings/${id}`);
+                showAlert('alertBox', 'Reservation cancelled successfully.', 'success');
+                loadBookings();
+            } catch(e) {
+                showAlert('alertBox', e.message);
+            }
+        }
+
+        window.onload = function() {
+            renderNavbarAuth();
+            loadBookings();
+        }
+    </script>
+</body>
+</html>
