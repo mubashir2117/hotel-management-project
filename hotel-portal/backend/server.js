@@ -9,12 +9,10 @@ const app = express();
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 
-// Serve Static Frontend Files
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, "../frontend")));
 
-// Root Route - Frontend Load Karega
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/login.html'));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/login.html"));
 });
 
 // Health check
